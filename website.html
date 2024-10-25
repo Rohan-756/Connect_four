@@ -1,0 +1,381 @@
+<html>
+    <head>
+        <title> connect 4</title>
+        <style>
+            .circles{
+                border:1px solid;
+                border-radius:50px;
+                height:50px;
+                width:50px;  
+                margin:10px; 
+                margin-right:0px;
+                background-color:white; 
+                box-shadow: 1px 1px 4px rgb(43, 42, 39);    
+            }
+
+            .column{
+                float:left;
+            }
+
+            p{
+                font-size:30px;
+                color:rgb(201, 20, 143);
+
+            }
+
+            #board{
+                border:1px solid;
+                border-radius:25px;
+                background-color:rgb(49, 80, 181);
+                height:380px;
+                width:440px;
+                /*position:absolute;
+                /*left:30%*/
+                margin:auto;
+            }
+
+            button{
+                display:block;
+                margin: auto;
+                border:0px solid;
+                border-radius: 7px;
+                height:30px;
+                width:80px;
+                color:white;
+                font-weight: bold;
+                background-color: rgb(44, 75, 176);
+            }
+        </style>
+    </head>
+
+    <body style="background-color:rgb(79, 51, 70)">
+        <h1 style="text-align: center;">CONNECT FOUR</h1>
+        <p style="text-align: center;">Red's turn</p>
+        <div id="board">
+        <div class="column">
+        <div class="circles column1" value="0"></div>
+        <div class="circles column1" value="0"></div>
+        <div class="circles column1" value="0"></div>
+        <div class="circles column1" value="0"></div>
+        <div class="circles column1" value="0"></div>
+        <div class="circles column1" value="0"></div>
+        </div>
+
+        <div class="column">
+        <div class="circles column2" value="0"></div>
+        <div class="circles column2" value="0"></div>
+        <div class="circles column2" value="0"></div>
+        <div class="circles column2" value="0"></div>
+        <div class="circles column2" value="0"></div>
+        <div class="circles column2" value="0"></div>
+        </div>
+
+        <div class="column">
+        <div class="circles column3" value="0"></div>
+        <div class="circles column3" value="0"></div>
+        <div class="circles column3" value="0"></div>
+        <div class="circles column3" value="0"></div>
+        <div class="circles column3" value="0"></div>
+        <div class="circles column3" value="0"></div>
+        </div>
+
+        <div class="column">
+        <div class="circles column4" value="0"></div>
+        <div class="circles column4" value="0"></div>
+        <div class="circles column4" value="0"></div>
+        <div class="circles column4" value="0"></div>
+        <div class="circles column4" value="0"></div>
+        <div class="circles column4" value="0"></div>
+        </div>
+
+        <div class="column">
+        <div class="circles column5" value="0"></div>
+        <div class="circles column5" value="0"></div>
+        <div class="circles column5" value="0"></div>
+        <div class="circles column5" value="0"></div>
+        <div class="circles column5" value="0"></div>
+        <div class="circles column5" value="0"></div>
+        </div>
+
+        <div class="column">
+        <div class="circles column6" value="0"></div>
+        <div class="circles column6" value="0"></div>
+        <div class="circles column6" value="0"></div>
+        <div class="circles column6" value="0"></div>
+        <div class="circles column6" value="0"></div>
+        <div class="circles column6" value="0"></div>
+        </div>
+
+        <div class="column">
+        <div class="circles column7" value="0"></div>
+        <div class="circles column7" value="0"></div>
+        <div class="circles column7" value="0"></div>
+        <div class="circles column7" value="0"></div>
+        <div class="circles column7" value="0"></div>
+        <div class="circles column7" value="0"></div>
+        </div>
+        </div>
+        
+        <br>
+        <button onclick="refresh()">Play again</button>
+
+
+        <script>
+            let turn=1;
+            //let matrix[6][7];
+            var circles=document.getElementsByClassName("circles");
+            var column1=document.getElementsByClassName("column1");
+            var column2=document.getElementsByClassName("column2");
+            var column3=document.getElementsByClassName("column3");
+            var column4=document.getElementsByClassName("column4");
+            var column5=document.getElementsByClassName("column5");
+            var column6=document.getElementsByClassName("column6");
+            var column7=document.getElementsByClassName("column7");
+
+            for(let i in column1)
+            {
+                column1[i].onclick=colour_col1;
+            }
+
+            for(let i in column2)
+            {
+                column2[i].onclick=colour_col2;
+            }
+
+            for(let i in column3)
+            {
+                column3[i].onclick=colour_col3;
+            }
+
+            for(let i in column4)
+            {
+               column4[i].onclick=colour_col4;
+            }
+            
+            for(let i in column5)
+            {
+                column5[i].onclick=colour_col5;
+            }
+            
+            for(let i in column6)
+            {
+                column6[i].onclick=colour_col6;
+            }
+
+            for(let i in column7)
+            {
+                column7[i].onclick=colour_col7;
+            }
+
+            // function colour(event)
+            // {
+            //     if(turn===1){
+            //         event.target.style.backgroundColor="red";
+            //         turn=-1;
+            //         document.querySelector("p").innerText="yellow's turn";
+            document.getElementById("board").style.boxShadow="0px 0px 15px yellow";
+            //     }
+            //     else if(turn===-1){
+            //         event.target.style.backgroundColor="yellow";
+            //         turn=1;
+            //         document.querySelector("p").innerText="Red's turn";
+            document.getElementById("board").style.boxShadow="0px 0px 15px red"
+            //     }
+            // }
+                
+            function colour_col1()
+            {
+                if(turn===1){
+                    for(i=5;i>=0;i--){
+                        if(column1[i].style.backgroundColor!="red"&&column1[i].style.backgroundColor!="yellow"){
+                            column1[i].style.backgroundColor="red";
+                            break;
+                        }
+                    }
+                    turn=-1;
+                    document.querySelector("p").innerText="yellow's turn";
+                    document.getElementById("board").style.boxShadow="0px 0px 15px yellow";
+                }
+                else if(turn===-1){
+                    for(i=5;i>=0;i--){
+                        if(column1[i].style.backgroundColor!="red"&&column1[i].style.backgroundColor!="yellow"){
+                            column1[i].style.backgroundColor="yellow";
+                            break;
+                        }
+                    }
+                    turn=1;
+                    document.querySelector("p").innerText="Red's turn";
+                    document.getElementById("board").style.boxShadow="0px 0px 15px red"
+                }
+            }
+
+            function colour_col2()
+            {
+                if(turn===1){
+                    for(i=5;i>=0;i--){
+                        if(column2[i].style.backgroundColor!="red"&&column2[i].style.backgroundColor!="yellow"){
+                            column2[i].style.backgroundColor="red";
+                            break;
+                        }
+                    }
+                    turn=-1;
+                    document.querySelector("p").innerText="Yellow's turn";
+                    document.getElementById("board").style.boxShadow="0px 0px 15px yellow";
+                }
+                else if(turn===-1){
+                    for(i=5;i>=0;i--){
+                        if(column2[i].style.backgroundColor!="red"&&column2[i].style.backgroundColor!="yellow"){
+                            column2[i].style.backgroundColor="yellow";
+                            break;
+                        }
+                    }
+                    turn=1;
+                    document.querySelector("p").innerText="Red's turn";
+                    document.getElementById("board").style.boxShadow="0px 0px 15px red"
+                }
+            }
+
+            function colour_col3()
+            {
+                if(turn===1){
+                    for(i=5;i>=0;i--){
+                        if(column3[i].style.backgroundColor!="red"&&column3[i].style.backgroundColor!="yellow"){
+                            column3[i].style.backgroundColor="red";
+                            break;
+                        }
+                    }
+                    turn=-1;
+                    document.querySelector("p").innerText="Yellow's turn";
+                    document.getElementById("board").style.boxShadow="0px 0px 15px yellow";
+                }
+                else if(turn===-1){
+                    for(i=5;i>=0;i--){
+                        if(column3[i].style.backgroundColor!="red"&&column3[i].style.backgroundColor!="yellow"){
+                            column3[i].style.backgroundColor="yellow";
+                            break;
+                        }
+                    }
+                    turn=1;
+                    document.querySelector("p").innerText="Red's turn";
+                    document.getElementById("board").style.boxShadow="0px 0px 15px red"
+                }
+            }
+
+            function colour_col4()
+            {
+                if(turn===1){
+                    for(i=5;i>=0;i--){
+                        if(column4[i].style.backgroundColor!="red"&&column4[i].style.backgroundColor!="yellow"){
+                            column4[i].style.backgroundColor="red";
+                            break;
+                        }
+                    }
+                    turn=-1;
+                    document.querySelector("p").innerText="Yellow's turn";
+                    document.getElementById("board").style.boxShadow="0px 0px 15px yellow";
+                }
+                else if(turn===-1){
+                    for(i=5;i>=0;i--){
+                        if(column4[i].style.backgroundColor!="red"&&column4[i].style.backgroundColor!="yellow"){
+                            column4[i].style.backgroundColor="yellow";
+                            break;
+                        }
+                    }
+                    turn=1;
+                    document.querySelector("p").innerText="Red's turn";
+                    document.getElementById("board").style.boxShadow="0px 0px 15px red"
+                }
+            }
+
+            function colour_col5()
+            {
+                if(turn===1){
+                    for(i=5;i>=0;i--){
+                        if(column5[i].style.backgroundColor!="red"&&column5[i].style.backgroundColor!="yellow"){
+                            column5[i].style.backgroundColor="red";
+                            break;
+                        }
+                    }
+                    turn=-1;
+                    document.querySelector("p").innerText="Yellow's turn";
+                    document.getElementById("board").style.boxShadow="0px 0px 15px yellow";
+                }
+                else if(turn===-1){
+                    for(i=5;i>=0;i--){
+                        if(column5[i].style.backgroundColor!="red"&&column5[i].style.backgroundColor!="yellow"){
+                            column5[i].style.backgroundColor="yellow";
+                            break;
+                        }
+                    }
+                    turn=1;
+                    document.querySelector("p").innerText="Red's turn";
+                    document.getElementById("board").style.boxShadow="0px 0px 15px red"
+                }
+            }
+
+            function colour_col6()
+            {
+                if(turn===1){
+                    for(i=5;i>=0;i--){
+                        if(column6[i].style.backgroundColor!="red"&&column6[i].style.backgroundColor!="yellow"){
+                            column6[i].style.backgroundColor="red";
+                            break;
+                        }
+                    }
+                    turn=-1;
+                    document.querySelector("p").innerText="Yellow's turn";
+                    document.getElementById("board").style.boxShadow="0px 0px 15px yellow";
+                }
+                else if(turn===-1){
+                    for(i=5;i>=0;i--){
+                        if(column6[i].style.backgroundColor!="red"&&column6[i].style.backgroundColor!="yellow"){
+                            column6[i].style.backgroundColor="yellow";
+                            break;
+                        }
+                    }
+                    turn=1;
+                    document.querySelector("p").innerText="Red's turn";
+                    document.getElementById("board").style.boxShadow="0px 0px 15px red"
+                }
+            }
+
+            function colour_col7()
+            {
+                if(turn===1){
+                    for(i=5;i>=0;i--){
+                        if(column7[i].style.backgroundColor!="red"&&column7[i].style.backgroundColor!="yellow"){
+                            column7[i].style.backgroundColor="red";
+                            break;
+                        }
+                    }
+                    turn=-1;
+                    document.querySelector("p").innerText="Yellow's turn";
+                    document.getElementById("board").style.boxShadow="0px 0px 15px yellow";
+                }
+                else if(turn===-1){
+                    for(i=5;i>=0;i--){
+                        if(column7[i].style.backgroundColor!="red"&&column7[i].style.backgroundColor!="yellow"){
+                            column7[i].style.backgroundColor="yellow";
+                            break;
+                        }
+                    }
+                    turn=1;
+                    document.querySelector("p").innerText="Red's turn";
+                    document.getElementById("board").style.boxShadow="0px 0px 15px red"
+                    //document.querySelector("body").style.backgroundColor="red";
+                }
+            }
+
+            function refresh(){
+                for(let i in circles){
+                    circles[i].style.backgroundColor="white";
+                    document.querySelector('p').innerText="Red's turn";
+                    document.getElementById("board").style.boxShadow="0px 0px 15px red";
+                    turn=1;
+                    }
+            }
+            
+        </script>
+
+    </body>
+</html>
